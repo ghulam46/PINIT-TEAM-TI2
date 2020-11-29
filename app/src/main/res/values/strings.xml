@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Konten</string>
+    <string name="hint_input_prodi">Username</string>
+    <string name="hint_input_password">password</string>
+    <string name="hint_input_user">username</string>
+</resources>
