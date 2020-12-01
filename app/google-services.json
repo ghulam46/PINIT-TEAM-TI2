@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "666903592661",
+    "firebase_url": "https://login-dan-registrasi-70e40.firebaseio.com",
+    "project_id": "login-dan-registrasi-70e40",
+    "storage_bucket": "login-dan-registrasi-70e40.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:666903592661:android:3332b5b535a6236a91ec5c",
+        "android_client_info": {
+          "package_name": "com.Kelompok_pinit.pinit1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "666903592661-1soju2t0a2hgjhj6fdcbpa4kh13bi9m5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZxh3-ll7jLIJYCnY9Kv2otaYNt-1sSoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "666903592661-1soju2t0a2hgjhj6fdcbpa4kh13bi9m5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

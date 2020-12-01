@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">Konten</string>
-    <string name="hint_input_prodi">Username</string>
-    <string name="hint_input_password">password</string>
-    <string name="hint_input_user">username</string>
+    <string name="app_name">Pinit1</string>
+    <string-array name="data_lat">
+        <item>-7.333797</item>
+        <item>-7.374473</item>
+    </string-array>
+    <string-array name="data_lang">
+        <item>109.206959</item>
+        <item>109.240532</item>
+    </string-array>
+    <string name="title_activity_maps">Map</string>
 </resources>
