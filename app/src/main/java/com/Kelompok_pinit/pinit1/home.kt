@@ -1,30 +1,56 @@
 package com.Kelompok_pinit.pinit1
 
+
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.fragment.app.Fragment
+import com.Kelompok_pinit.pinit1.Fragments.ChatFragment
+import com.Kelompok_pinit.pinit1.Fragments.HomeFragment
+import com.Kelompok_pinit.pinit1.Fragments.ProfilFragment
+import com.Kelompok_pinit.pinit1.Fragments.SearchFragment
 
-class home : AppCompatActivity() {
+import com.Kelompok_pinit.pinit1.databinding.ActivityHomeBinding
+
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.fragment_profil.*
+
+
+class home  : AppCompatActivity() {
+    private lateinit var auth: FirebaseAuth
+    private lateinit var binding: ActivityHomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        findViewById<FloatingActionButton>(R.id.floatingActionButton2).setOnClickListener { view ->
-            val moveWithObjectIntent = Intent(this, home::class.java)
-            startActivity(moveWithObjectIntent)
+        val homeFragment = HomeFragment()
+        val chatFragment = ChatFragment()
+        val searchFragment = SearchFragment()
+        val profilFragment = ProfilFragment ()
+
+
+
+        makeCurrentFragment(homeFragment)
+
+        navigasi.setOnNavigationItemReselectedListener {
+
+            when (it.itemId){
+                R.id.home -> makeCurrentFragment(homeFragment)
+                R.id.search -> makeCurrentFragment(searchFragment)
+                R.id.Chat -> makeCurrentFragment(chatFragment)
+                R.id.profil-> makeCurrentFragment(profilFragment)
+
+            }
+            true
         }
-        findViewById<FloatingActionButton>(R.id.floatingActionButton3).setOnClickListener { view ->
-            val moveWithObjectIntent = Intent(this, search::class.java)
-            startActivity(moveWithObjectIntent)
-        }
-        findViewById<FloatingActionButton>(R.id.floatingActionButton4).setOnClickListener { view ->
-            val moveWithObjectIntent = Intent(this, chat::class.java)
-            startActivity(moveWithObjectIntent)
-        }
-        findViewById<FloatingActionButton>(R.id.floatingActionButton5).setOnClickListener { view ->
-            val moveWithObjectIntent = Intent(this, profil::class.java)
-            startActivity(moveWithObjectIntent)
-        }
+
     }
+private fun makeCurrentFragment(fragment:Fragment) =
+    supportFragmentManager.beginTransaction().apply {
+        replace(R.id.wrapper,fragment)
+        commit()
+    }
+
 }

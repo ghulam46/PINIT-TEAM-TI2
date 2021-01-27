@@ -9,4 +9,17 @@
         <item>109.240532</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
+    <string name="hint_input_user">username</string>
+    <string name="hint_input_password">password</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="HOME">Home</string>
+    <string name="Home">Home</string>
+    <string name="Chat">Chat</string>
+    <string name="Profil">Profil</string>
+    <string name="Search">Search</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+    <string name="chat">Chat</string>
+    <string name="profil">Profil</string>
 </resources>

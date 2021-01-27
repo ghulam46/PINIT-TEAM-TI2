@@ -1,76 +1,89 @@
 package com.Kelompok_pinit.pinit1
 
-import android.R.attr
+
 import android.content.Intent
 import android.os.Bundle
-import android.util.Patterns
+import android.text.TextUtils
+import android.view.View
 import android.widget.Toast
+
 import androidx.appcompat.app.AppCompatActivity
+import com.Kelompok_pinit.pinit1.Fragments.Success
+import com.Kelompok_pinit.pinit1.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_registrasi.*
 
 
-class login : AppCompatActivity() {
-
+class login: AppCompatActivity(), View.OnClickListener {
     private lateinit var auth: FirebaseAuth
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.btnSign.setOnClickListener(this)
+        binding.tvSignUp.setOnClickListener(this)
+        binding.btnEmail.setOnClickListener(this)
+        binding.btnPhone.setOnClickListener(this)
 
-        auth = Firebase.auth
+    auth = Firebase.auth     }
 
-        btn_login.setOnClickListener{
-        do_login()
-            startActivity (Intent(this@login, home::class.java))
-                        finish()
-
-//            auth.signInWithEmailAndPassword(login_username.text.toString(), login_password.text.toString())
-//                .addOnCompleteListener(this) { task ->
-//                    if (task.isSuccessful) {
-//
-//                        //val user = auth.currentUser
-//                        startActivity (Intent(this@login, home::class.java))
-//                        finish()
-//                    } else {
-//
-//                        Toast.makeText(baseContext, "Authentication failed.",
-//                            Toast.LENGTH_SHORT).show()
-//                        // ...
-//                    }
-//
-//                    // ...
-//                }
+    override fun onClick(v: View) {
+        when (v.id) {
+            R.id.btnSign -> {
+                signIn(binding.inputEmail.text.toString(),
+                    binding.inputPassword.text.toString())
+            }         R.id.tvSignUp -> {
+            val intent = Intent(this@login, registrasi::class.java)
+            startActivity(intent)         }
         }
     }
 
-    private fun do_login() {
-        if (login_username.text.toString().isEmpty()) {
-            login_username.error = "Please enter email"
-            login_username.requestFocus()
-            return
+    private fun signIn(email: String, password: String) {
+        if (!validateForm()) {
+            return     }
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    finish()
+                    val intent = Intent(this@login, Success::class.java)
+                    startActivity(intent)
+                } else {
+                    Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                }
+            } }
+
+    private fun validateForm(): Boolean {
+        var valid = true
+
+        val email = binding.inputEmail.text.toString()
+        if (TextUtils.isEmpty(email))
+        {
+            binding.inputEmail.error = "Required."
+            valid = false
+        } else {         binding.inputEmail.error = null     }
+        val password = binding.inputPassword.text.toString()
+        if (TextUtils.isEmpty(password))
+        {
+            binding.inputPassword.error = "Required."
+            valid = false
+        } else {
+            binding.inputPassword.error = null
         }
-        if (Patterns.EMAIL_ADDRESS.matcher(login_username.text.toString()).matches()) {
-            login_username.error = "Please enter valid email"
-            login_username.requestFocus()
-            return
-        }
-        if (login_password.text.toString().isEmpty()) {
-            login_password.error = "Please enter password"
-            login_password.requestFocus()
-            return
-        }
+        return valid
     }
 
-
-public override fun onStart() {
-    super.onStart()
-    // Check if user is signed in (non-null) and update UI accordingly.
-    val currentUser = auth.currentUser
-}
-
+    public override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val intent = Intent(this@login, Success::class.java)
+            startActivityForResult(intent, 1)
+            finish()
+        }
+    }
 
 }
