@@ -10,9 +10,20 @@
   <FrameLayout
       android:id="@+id/wrapper"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"/>
+      android:layout_height="match_parent" >
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+    android:background="@color/purple_500"
+    app:itemBackground="@color/cardview_shadow_start_color"
+    app:menu="@menu/up_menu" />
+  </FrameLayout>
+
+  <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigasi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,6 +31,9 @@
         android:background="?android:attr/windowBackground"
         app:itemBackground="@color/cardview_shadow_start_color"
         app:menu="@menu/nav_menu"/>
+
+
+
 
 
 

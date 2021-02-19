@@ -19,4 +19,6 @@
         android:id="@+id/profil"
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/profil"/>
+
+
 </menu>
